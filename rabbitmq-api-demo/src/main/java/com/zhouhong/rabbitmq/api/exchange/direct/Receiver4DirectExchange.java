@@ -20,7 +20,6 @@ public class Receiver4DirectExchange {
         connectionFactory.setAutomaticRecoveryEnabled(true);
         connectionFactory.setNetworkRecoveryInterval(3000);
         Connection connection = connectionFactory.newConnection();
-        
         Channel channel = connection.createChannel();  
 		//4 声明
 		String exchangeName = "test_direct_exchange";
@@ -30,7 +29,6 @@ public class Receiver4DirectExchange {
 		channel.exchangeDeclare(exchangeName, exchangeType, true, false, false, null);
 		channel.queueDeclare(queueName, false, false, false, null);
 		channel.queueBind(queueName, exchangeName, routingKey);
-		
         //durable 是否持久化消息
         QueueingConsumer consumer = new QueueingConsumer(channel);
         //参数：队列名称、是否自动ACK、Consumer
